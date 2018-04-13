@@ -1,0 +1,53 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+
+    <!-- <div>
+      <img class="logo" src="../../assets/WinnerPro-Logo.png">
+    </div> -->
+
+    <button mat-button [matMenuTriggerFor]="lists">Lists</button>
+    <mat-menu #lists="matMenu">
+      <button mat-menu-item routerLink="/product">
+        <mat-icon>shopping_cart</mat-icon>Product</button>
+      <button mat-menu-item>
+        <mat-icon>face</mat-icon> Customer</button>
+      <button mat-menu-item>
+        <mat-icon>local_shipping</mat-icon> Supplier</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="transactions">Transactions</button>
+    <mat-menu #transactions="matMenu">
+      <button mat-menu-item>
+        <mat-icon>beenhere</mat-icon>Order Confirmation
+      </button>
+      <button mat-menu-item>
+        <mat-icon>speaker_notes</mat-icon> Delivery Note
+      </button>
+      <button mat-menu-item routerLink="/invoice">
+        <mat-icon>format_list_bulleted</mat-icon> Invoice
+      </button>
+      <button mat-menu-item>
+        <mat-icon>assignment_return</mat-icon>Sales Return
+      </button>
+      <button mat-menu-item>
+        <mat-icon>note_add</mat-icon> Purchase Invoice
+      </button>
+      <button mat-menu-item>
+        <mat-icon>payment</mat-icon> Invoice Payment
+      </button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="reports">Reports</button>
+    <mat-menu #reports="matMenu">
+      <button mat-menu-item>
+        <mat-icon>playlist_add_check</mat-icon>Order Confirmation Summary</button>
+      <button mat-menu-item>
+        <mat-icon>airport_shuttle</mat-icon> Delivery Note Summary</button>
+      <button mat-menu-item>
+        <mat-icon>date_range</mat-icon> Reports - Monthly Tax Amount</button>
+      <button mat-menu-item>
+        <mat-icon>chrome_reader_mode</mat-icon> List Of Bills</button>
+    </mat-menu>
+
+  </mat-toolbar-row>
+</mat-toolbar>

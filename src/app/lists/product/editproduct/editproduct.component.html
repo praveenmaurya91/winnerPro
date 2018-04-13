@@ -1,0 +1,69 @@
+<form class="form">
+  <div class="row">
+    <div class="col-md-5">
+      <mat-form-field class="item">
+        <input matInput class="label " name="name" [(ngModel)]="name" placeholder="Name">
+        <!-- <mat-error>
+            {{errors.name}}
+          </mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="col-md-5">
+      <mat-form-field class="item">
+        <input matInput class="label " name="sku" [(ngModel)]="sku" placeholder="SKU">
+        <!-- <mat-error>
+            {{errors.sku}}
+          </mat-error> -->
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <mat-form-field class="item">
+        <input matInput class="label " name="unit1" [(ngModel)]="unit1" placeholder="Unit 1">
+        <!-- <mat-error>
+            {{errors.unit1}}
+          </mat-error> -->
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <mat-form-field class="item">
+        <input matInput class="label " name="unit2" [(ngModel)]="unit2" placeholder="Unit 2">
+        <!-- <mat-error>
+            {{errors.unit2}}
+          </mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="col-md-5">
+      <mat-form-field class="item">
+        <input matInput class="label" type="number" name="rasio2" [(ngModel)]="rasio2" placeholder="Rasio 2 / Ltr">
+        <!-- <mat-error>
+            {{errors.rasio2}}
+          </mat-error> -->
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <mat-form-field class="item">
+        <input matInput class="label " name="unit3" [(ngModel)]="unit3" placeholder="Unit 3">
+        <!-- <mat-error>
+            {{errors.unit3}}
+          </mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="col-md-5">
+      <mat-form-field class="item">
+        <input matInput class="label" type="number" name="rasio3" [(ngModel)]="rasio3" placeholder="Rasio 3 / Ltr">
+        <!-- <mat-error>
+            {{errors.rasio3}}
+          </mat-error> -->
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+
+
+<button mat-raised-button color="warn" (click)="updateProduct()">Save</button>

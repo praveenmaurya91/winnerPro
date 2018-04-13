@@ -1,0 +1,59 @@
+.item{
+  width: 300px;
+}  
+#contact{
+  margin-top: 3vh;
+}
+
+.button-row{
+    margin-left: 15px;  
+}
+.example-header{
+    background: white;
+}
+
+.example-container
+{
+  display: flex;
+  flex-direction: column;
+  min-width: 300px
+}
+.example-header{
+  min-height: 64px;
+  padding: 8px 24px 0
+}
+  
+.mat-form-field{
+  font-size: 14px;
+  width: 100%
+}
+
+.mat-table{
+overflow: auto;
+}
+  
+.animate{
+ background-image: none !important;
+  animation: fadeIt 1s ease-in-out
+}
+ 
+.print-button{
+  margin-bottom: 20px;
+  margin-top:30px;
+}
+
+.logo{
+  width:130px;
+  height:120px;
+}
+
+#header{
+ text-align: center;
+}
+
+/**Media query for mobile responsiveness*/
+@media(max-width:786px){
+    #content{
+        margin-left: 0;  
+    }
+}

@@ -1,0 +1,234 @@
+<section id="contact" class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-card>
+          <div id="header">
+            <div>
+              <img class="logo" src="../../../assets/WinnerPro-Logo.png">
+            </div>
+            <br>
+            <h1>
+              Transaction Invoice
+            </h1>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-card>
+          <div id="content">
+            <mat-card-content>
+              <form class="form" [formGroup]="form" novalidate>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label " name="number" placeholder="Number" formControlName="number">
+                      <mat-error>
+                        {{errors.number}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date" autocomplete="off">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-error>
+                        {{errors.date}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label " name="customer" placeholder="Customer" formControlName="customer">
+                      <mat-error>
+                        {{errors.customer}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label " name="terms" placeholder="Terms / day(s)" formControlName="terms">
+                      <mat-error>
+                        {{errors.terms}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label" name="paymentDue" placeholder="Payment Due (date + terms)" formControlName="paymentDue">
+                      <mat-error>
+                        {{errors.paymentDue}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <br>
+                    <mat-checkbox>PPN 10%</mat-checkbox>
+                    <br>
+                    <br>
+                    <div class="example-selected-value">
+                      <h5>Terms of payment</h5>
+                    </div>
+                    <mat-radio-group class="example-radio-group" [(ngModel)]="termsOfPayment" formControlName="termsOfPayment">
+                      <mat-radio-button class="item" *ngFor="let paymentTerm of paymentTerms" [value]="paymentTerm">
+                        {{paymentTerm}}
+                      </mat-radio-button>
+                      <!-- <mat-error>
+                        {{errors.termsOfPayment}}
+                      </mat-error> -->
+                    </mat-radio-group>
+                  </div>
+
+                  <!-- <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <mat-checkbox  name="ppn" formControlName="ppn" [(ngModel)]="ppn">PPN 10%</mat-checkbox>
+                      <mat-error>
+                        {{errors.ppn}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field class="item">
+                      <input matInput class="label " name="description" placeholder="Description" formControlName="description">
+                      <mat-error>
+                        {{errors.description}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="button-row">
+                <button mat-raised-button color="primary" (click)="submit(form)" [disabled]="form.invalid">Select Delivery Note</button>
+              </div>
+            </mat-card-actions>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="example-container mat-elevation-z8">
+          <div class="example-header">
+            <div class="print-button">
+              <button mat-raised-button color="accent" (click)="print()">
+                Print
+              </button>
+            </div>
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+          </div>
+
+          <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid" class="animate">
+
+            <ng-container matColumnDef="deloveryNoteNo">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Delivery Note Number </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{ delivery.deloveryNoteNo }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="product">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Product </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{ delivery.product }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{ delivery.quantity }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="unit">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Unit </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{ delivery.unit }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="unitPrice">
+              <mat-header-cell *matHeaderCellDef> Unit Price </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{delivery.unitPrice}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+              <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{delivery.amount}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dc">
+              <mat-header-cell *matHeaderCellDef> DC </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{delivery.dc}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="pc">
+              <mat-header-cell *matHeaderCellDef> PC </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{delivery.pc}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="mc">
+              <mat-header-cell *matHeaderCellDef> MC </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{delivery.mc}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ws">
+              <mat-header-cell *matHeaderCellDef> WS </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{delivery.ws}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="gc">
+              <mat-header-cell *matHeaderCellDef> GC </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{delivery.gc}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="quantityPatong">
+              <mat-header-cell *matHeaderCellDef> Quantity Patong per Hr/Kg </mat-header-cell>
+              <mat-cell *matCellDef="let delivery"> {{delivery.quantityPatong}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
+              <mat-cell *matCellDef="let delivery">
+                <button mat-raised-button color="primary" (click)="openDialog($event, delivery)">Edit</button>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Delete </mat-header-cell>
+              <mat-cell *matCellDef="let delivery">
+                <button mat-raised-button color="warn" (click)="deleteDelivery($event, delivery)">Delete</button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+          </mat-table>
+
+          <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+          </mat-paginator>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>

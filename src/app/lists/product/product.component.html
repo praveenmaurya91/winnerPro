@@ -1,0 +1,186 @@
+<section id="contact" class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-card>
+          <div id="header">
+            <div>
+              <img class="logo" src="../../../assets/WinnerPro-Logo.png">
+            </div>
+            <br>
+            <h1>
+              List-Product
+            </h1>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section  class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-card>
+          <div id="content">
+            <mat-card-content>
+              <form class="form" [formGroup]="form" novalidate>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label " name="name" placeholder="Name" formControlName="name">
+                      <mat-error>
+                        {{errors.name}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label " name="sku" placeholder="SKU" formControlName="sku">
+                      <mat-error>
+                        {{errors.sku}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label " name="unit1" placeholder="Unit 1" formControlName="unit1">
+                      <mat-error>
+                        {{errors.unit1}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row" formGroupName="unitGroup">
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label " name="unit2" placeholder="Unit 2" formControlName="unit2" >
+                      <mat-error >
+                        {{errors.unit2}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label" type="number" name="rasio2" placeholder="Rasio 2 / Ltr" formControlName="rasio2" >
+                      <mat-error>
+                        {{errors.rasio2}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row"  formGroupName="unitGroup">
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label " name="unit3" placeholder="Unit 3" formControlName="unit3">
+                      <mat-error>
+                        {{errors.unit3}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="item">
+                      <input matInput class="label" type="number" name="rasio3" placeholder="Rasio 3 / Ltr" formControlName="rasio3">
+                      <mat-error>
+                        {{errors.rasio3}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="button-row">
+                <button mat-raised-button color="primary" (click)="submit(form)" [disabled]="form.invalid">Save</button>
+              </div>
+            </mat-card-actions>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="example-container mat-elevation-z8">
+          <div class="example-header">
+            <div class="print-button">
+              <button mat-raised-button color="accent" (click)="print()">
+                Print
+              </button>
+            </div>
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+          </div>
+
+          <mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid" class="animate">
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+              <mat-cell *matCellDef="let product"> {{ product.name }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="sku">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> SKU </mat-header-cell>
+              <mat-cell *matCellDef="let product"> {{ product.sku }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="unit1">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Unit 1 </mat-header-cell>
+              <mat-cell *matCellDef="let product"> {{ product.unit1 }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="unit2">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Unit 2 </mat-header-cell>
+              <mat-cell *matCellDef="let product"> {{ product.unitGroup.unit2 }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="rasio2">
+              <mat-header-cell *matHeaderCellDef> Rasio 2 </mat-header-cell>
+              <mat-cell *matCellDef="let product"> {{product.unitGroup.rasio2}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="unit3">
+              <mat-header-cell *matHeaderCellDef> Unit 3 </mat-header-cell>
+              <mat-cell *matCellDef="let product"> {{product.unitGroup.unit3}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="rasio3">
+              <mat-header-cell *matHeaderCellDef> Rasio 2 </mat-header-cell>
+              <mat-cell *matCellDef="let product"> {{product.unitGroup.rasio3}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
+              <mat-cell *matCellDef="let product">
+                <button mat-raised-button color="primary" (click)="openDialog($event, product)">Edit</button>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Delete </mat-header-cell>
+              <mat-cell *matCellDef="let product">
+                <button mat-raised-button color="warn" (click)="deleteProduct($event, product)">Delete</button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+          </mat-table>
+
+          <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+          </mat-paginator>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
